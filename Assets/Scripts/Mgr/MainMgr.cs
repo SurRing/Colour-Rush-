@@ -21,8 +21,6 @@ public class MainMgr : MonoBehaviour {
     public static float BlockLength;
     public static Dictionary<Colour, Color> rainbow = new Dictionary<Colour, Color>();
 
-    public StartBlockCtrl StartBlock;
-
     public PlayerCtrl player;
     public MapMgr map;
     public int difficulty;
@@ -35,7 +33,7 @@ public class MainMgr : MonoBehaviour {
     {
         Instance = this;
         BlockLength = player.GetComponent<SpriteRenderer>().bounds.size.x;
-        rainbow.Add(Colour.White, new Color(0, 0, 0));
+        rainbow.Add(Colour.White, new Color(1, 1, 1));
         rainbow.Add(Colour.Red, new Color(255 / 255f, 0, 0));
         rainbow.Add(Colour.Orange, new Color(255 / 255f, 152 / 255f, 0));
         rainbow.Add(Colour.Yellow, new Color(255 / 255f, 255 / 255f, 0));
@@ -43,7 +41,7 @@ public class MainMgr : MonoBehaviour {
         rainbow.Add(Colour.Cyan, new Color(0, 255 / 255f, 255 / 255f));
         rainbow.Add(Colour.Blue, new Color(0, 0, 255 / 255f));
         rainbow.Add(Colour.Purple, new Color(150 / 255f, 0, 255 / 255f));
-        rainbow.Add(Colour.Black, new Color(255 / 255f, 255 / 255f, 255 / 255f));
+        rainbow.Add(Colour.Black, new Color(0, 0, 0));
     }
 
     // Use this for initialization
@@ -91,10 +89,11 @@ public class MainMgr : MonoBehaviour {
 
     public void Reset()
     {
+        if (chossePlane.active == true) return;
         rainbowPlane.Reset();
         MapMgr.Instance.Reset();
+        player.Colour(Colour.White, Colour.White, Colour.White);
         victoryButton.SetActive(false);
-
 
         chossePlane.SetActive(true);
     }
